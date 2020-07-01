@@ -1,63 +1,64 @@
 import turtle
 
+s = turtle.Screen()
+s.bgcolor("yellow")
+s.title("GUESS THE WORD GAME")
+
 t = turtle.Turtle()
 t1 = turtle.Turtle()
-s= turtle.Screen()
+t2 = turtle.Turtle()
+t3 = turtle.Turtle()
+t4 = turtle.Turtle()
+
 
 def static_part():
-    t.penup()
-    t.goto(-320, 250)
-    t.pendown()
-    t.color('blue')
-    turtle.bgcolor("yellow")
+    t4.penup()
+    t4.goto(-320, 250)
+    t4.pendown()
+    t4.color('blue')
     style1 = ('Courier', 20, 'italic')
-    t.write('Guess the word: ', font=style1, align='left')
-    t.hideturtle()
-
-    t.penup()
-    t.goto(-320, -150)
-    t.pendown()
-    t.color('green')
-    t.write('Wrong guesses : ', font=style1, align='left')
-    t.hideturtle()
-
+    t4.write('Guess the word: ', font=style1, align='left')
+    t4.hideturtle()
+    t4.penup()
+    t4.goto(-320, -150)
+    t4.pendown()
+    t4.color('green')
+    t4.write('Wrong guesses : ', font=style1, align='left')
+    t4.hideturtle()
 
 
-def word(w1):
-    stars = ''
-    n3 = len(w1)
-    for n2 in range(n3):
-        stars = stars + '  *'
-
-    t.penup()
-    t.goto(-320, 220)
-    t.pendown()
-    t.color('blue')
+def wordfn(w1):
+    t1.clear()
+    t1.penup()
+    t1.goto(-320, 220)
+    t1.pendown()
+    t1.color('blue')
     style1 = ('Courier', 22, 'italic')
-    t.write(stars, font=style1, align='left')
-    t.hideturtle()
+    t1.write(w1, font=style1, align='left')
+    t1.hideturtle()
 
 
 def wrong(w2):
-    t.penup()
-    t.goto(-320, -200)
-    t.pendown()
-    t.color('green')
+    t2.clear()
+    t2.penup()
+    t2.goto(-320, -200)
+    t2.pendown()
+    t2.color('green')
     style1 = ('Courier', 20, 'italic')
-    t.write(w2, font=style1, align='left')
-    t.hideturtle()
+    t2.write(w2, font=style1, align='left')
+    t2.hideturtle()
 
 
 def attempt(n):
-    t1.clear()
+    t3.clear()
     n = str(n)
-    t1.penup()
-    t1.goto(0, -250)
-    t1.pendown()
-    t1.color('black')
+    t3.penup()
+    t3.goto(0, -250)
+    t3.pendown()
+    t3.color('black')
     style1 = ('Courier', 18, 'italic')
-    t1.write('Yow have ' + n + ' attempts left', font=style1, align='center')
-    t1.hideturtle()
+    t3.write('Yow have ' + n + ' attempts left', font=style1, align='center')
+    t3.hideturtle()
 
 
 def part_1():
@@ -74,8 +75,7 @@ def part_1():
     t.fd(80)
     t.rt(90)
     t.fd(60)
-    t.pencolor('blue')
-    t.fillcolor('red')
+    t.pen(pencolor='blue', fillcolor='red')
     t.begin_fill()
     # t.color('red')
     t.fd(15)
@@ -89,8 +89,6 @@ def part_1():
 
 
 def part_2():
-    # t.lt(90)
-    # part_1()
     t.pen(pencolor='red', fillcolor='red')
     t.penup()
     t.fd(10)
@@ -177,6 +175,7 @@ def part_8():
     t.end_fill()
     t.end_fill()
 
+
 def lose():
     t.penup()
     t.goto(0, 150)
@@ -186,6 +185,7 @@ def lose():
     style1 = ('Courier', 25, 'italic')
     t.write('YOU LOSE!', font=style1, align='center')
     t.hideturtle()
+
 
 def won():
     t.penup()
@@ -198,23 +198,26 @@ def won():
     t.hideturtle()
 
 
-w = "****"
-w3 = "asbsjb"
-n1 = 8
-static_part()
-word(w)
-wrong(w3)
-for n in range(8):
-    # s.update()
-    attempt(n)
-part_1()
-#part_2()
-#part_3()
-#part_4()
-#part_5()
-#part_6()
-#part_7()
-#part_8()
-#lose()
-# won()
+def draw(argument):
+    switcher = {
+        1: part_1,
+        2: part_2,
+        3: part_3,
+        4: part_4,
+        5: part_5,
+        6: part_6,
+        7: part_7,
+        8: part_8
+
+    }
+    # Get the function from switcher dictionary
+    func = switcher.get(argument)
+    # Execute the function
+    func()
+
+
+def clearsc():
+    print('\n' * 200)
+
+
 turtle.done()
